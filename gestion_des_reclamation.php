@@ -1,18 +1,4 @@
-<?php
-session_start();
-include "core/reclamationC.php";
-$reclamation1C=new reclamationC();
-                $listereclamation=$reclamation1C-> afficherReclamation();
 
-   // $list=$cat->categoriePrint();
-//var_dump($list);
-?>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 
 
 <head>
@@ -258,8 +244,8 @@ $reclamation1C=new reclamationC();
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"></a></p>
-          <h5 class="centered">Marouen Abbes</h5>
+          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <h5 class="centered">Sam Soffes</h5>
           <li class="mt">
             <a href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -317,8 +303,9 @@ $reclamation1C=new reclamationC();
               </a>
             <ul class="sub">
               <li class="active"><a href="gestion_des_reclamation.php">gestion des réclamation</a></li>
-              <li ><a href="modifierreclamation1.php">modifier réclamation</a></li>
+              <li><a href="trierreclamation.php">tri des réclamations</a></li>
               <li><a href="gestion_des_avis.php">gestion des avis</a></li>
+              <li><a href="trieravis.php">tri des avis</a></li>
               <li><a href="contactform.html">Contact Form</a></li>
               
             </ul>
@@ -386,6 +373,13 @@ $reclamation1C=new reclamationC();
           <div class="col-lg-12">
             <div class="form-panel">
               
+                <?PHP
+                include "../core/reclamationC.php";
+                $reclamation1C=new reclamationC();
+                $listereclamation=$reclamation1C-> afficherReclamation();
+
+                 //var_dump($listereclamation->fetchAll()); 
+                 ?>
                 
                 
                  <table border="1" >
@@ -420,22 +414,52 @@ $reclamation1C=new reclamationC();
                               </table>
                               <br>
                               <br>
+                                      <form class="form-inline" method="POST" action="mail.php" >
+                      <fieldset >
+                                <div class="form-group">
+                        <label style="color: black" for="id">envoyer un mail de confirmation:</label>
+                        <input class="form-control" type="mail" name="mail_to" id="mail_to" placeholder="mail du client" >
+                  <input type="submit" name="envoyer" value="envoyer" class="btn btn-info"  >
+                </div>
+                 </fieldset>
+                    </form>
+                              <form class="form-inline" method="POST" action="trierreclamation.php" >
+                      <fieldset >
+                                <div class="form-group">
+                        <label style="color: black" for="id">trier les réclamations par objet:</label>
+                  <input type="submit" name="trier" value="trier" class="btn btn-info"  >
+                </div>
+                 </fieldset>
+                    </form>
+                      <form class="form-inline" method="POST" action="rechercherreclamation.php" >
+                      <fieldset >
+
+                      <div class="form-group">
+                  <label style="color: black" for="id">Saisir l'id de la réclamation à rechercher:</label><br>
+                  <input class="form-control" type="text" name="id_r1" id="id_r1" placeholder="id:reclamation a rechercher">
+                  <input type="submit" name="rechercher" value="rechercher" class="btn btn-info">
+                </div>
+                      </fieldset>
+                    </form>
+
+
                     <form class="form-inline" method="POST" action="supprimereclamation.php" >
                       <fieldset >
 
                       <div class="form-group">
                   <label style="color: black" for="id">Saisir l'id de la réclamation à supprimer:</label><br>
                   <input class="form-control" type="text" name="id" id="id" placeholder="id:reclamation a supprimer">
-                  <input type="submit" name="supprimer" value="supprimer">
+                  <input type="submit" name="supprimer" value="supprimer" class="btn btn-info">
                 </div>
                       </fieldset>
                     </form>
+
                     <form class="form-inline" method="POST" action="pdf.php" >
                       <fieldset >
 
                       <div class="form-group">
                         <label style="color: black" for="id">télécharger la listes des reclamations.pdf:</label>
-                  <input type="submit" name="telecharger" value="télécharger">
+                  <input type="submit" name="telecharger" value="télécharger" class="btn btn-info">
                 </div>
                       </fieldset>
                     </form>
@@ -465,7 +489,7 @@ $reclamation1C=new reclamationC();
                     <form class="form-inline" method="POST" action="modifiereclamation.php">
                       <label style="color: black" for="id">Saisir l'id de la réclamation à modifier:</label><br>
                        <input class="form-control" type="text" name="id_mod" id="id_mod" placeholder="id:reclamation a modifier">
-                       <input type="submit" name="modifier" value="modifier">
+                       <input type="submit" name="modifier" value="modifier" class="btn btn-info">
                        <br><br>
                        <input class="form-control" type="text" name="nom_et_prenom" id="nom_et_prenom" placeholder="nom et prenom a modifier">
                        <input class="form-control" type="text" name="id" id="id" placeholder="id a modifier"><br>

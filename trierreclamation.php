@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>services des avis </title>
+  <title>service des réclamations </title>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -302,9 +302,9 @@
               <span>avis et réclamation</span>
               </a>
             <ul class="sub">
-              <li ><a href="gestion_des_reclamation.php">gestion des réclamation</a></li>
-              <li><a href="trierreclamation.php">tri des réclamations</a></li>
-              <li class="active"><a href="gestion_des_avis.php">gestion des avis</a></li>
+              <li><a href="gestion_des_reclamation.php">gestion des réclamation</a></li>
+              <li class="active"><a href="trierreclamation.php">tri des réclamations</a></li>
+              <li><a href="gestion_des_avis.php">gestion des avis</a></li>
               <li><a href="trieravis.php">tri des avis</a></li>
               <li><a href="contactform.html">Contact Form</a></li>
               
@@ -367,16 +367,16 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper" >
-        <h3><i class="fa fa-angle-right"></i> affichage des avis</h3>
+        <h3><i class="fa fa-angle-right"></i> affichage des réclamations trier par objet</h3>
         <!-- BASIC FORM ELELEMNTS -->
         <div class="row mt">
           <div class="col-lg-12">
             <div class="form-panel">
               
                 <?PHP
-                include "../core/avisC.php";
-                $avis1C=new avisC();
-                $listeavis=$avis1C-> afficherAvis();
+                include "../core/reclamationC.php";
+                $reclamation1C=new reclamationC();
+                $listereclamation=$reclamation1C-> trierReclamation();
 
                  //var_dump($listereclamation->fetchAll()); 
                  ?>
@@ -386,8 +386,9 @@
                   <tr>
                  <td>Nom et prenom</td>
                  <td>id</td>
-                 <td>age</td> 
-                 <td>note</td>
+                 <td>Email</td> 
+                 <td>objet</td>
+                  <td>commentaire</td>
                   
                  
                   </tr>
@@ -395,14 +396,16 @@
                      <?PHP
                      //echo "imchi";
 
-                     foreach($listeavis as $row){
+                     foreach($listereclamation as $row){
                       ?>
                          <tr>
-                        <td><?PHP echo $row['nom_et_prenom_avis']; ?></td>
-                        <td><?PHP echo $row['id_avis']; ?></td>
-                        <td><?PHP echo $row['age']; ?></td>
-                        <td><?PHP echo $row['note']; ?></td>
-                        
+                        <td><?PHP echo $row['nom_et_prenom']; ?></td>
+                        <td><?PHP echo $row['id']; ?></td>
+                        <td><?PHP echo $row['mail']; ?></td>
+                        <td><?PHP echo $row['objet']; ?></td>
+                        <td><?PHP echo $row['commentaire']; ?></td>
+
+                         
                         
                           </tr>
                          <?PHP
@@ -410,184 +413,23 @@
                               ?>
                               </table>
                               <br>
-                              <br>
-                                    <form class="form-inline" method="POST" action="trieravis.php" >
+                              <form class="form-inline" method="POST" action="gestion_des_reclamation.php" >
                       <fieldset >
-                                <div class="form-group">
-                        <label style="color: black" for="id">trier les avis par note:</label>
-                  <input type="submit" name="trier" value="trier" class="btn btn-info"  >
-                </div>
-                 </fieldset>
-                    </form>
-                     </form>
-                      <form class="form-inline" method="POST" action="rechercheravis.php" >
-                      <fieldset >
-
-                      <div class="form-group">
-                  <label style="color: black" for="id">Saisir l'id de l'avis à rechercher:</label><br>
-                  <input class="form-control" type="text" name="id_r2" id="id_r2" placeholder="id:reclamation a rechercher">
-                  <input type="submit" name="rechercher" value="rechercher" class="btn btn-info">
+                      <div class="form-group"> 
+                  <input type="submit" name="retour" value="retour" class="btn btn-info">
                 </div>
                       </fieldset>
                     </form>
+                    
+          
 
 
-                    <form class="form-inline" method="POST" action="supprimeavis.php" >
-                      <fieldset >
 
-                      <div class="form-group">
-                  <label style="color: black" for="id_avis">Saisir l'id de l'avis à supprimer:</label><br>
-                  <input class="form-control" type="text" name="id_avis" id="id_avis" placeholder="id:avis a supprimer">
-                  <input type="submit" name="supprimer" value="supprimer" class="btn btn-info">
-                </div>
-                      </fieldset>
-                    </form>
+                    
+                    
+       
             </div>
           </div>
-          <h3><i class="fa fa-angle-right"></i> nombre totale des avis</h3>
-          <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-             <?php
-                $listeavis=$avis1C-> afficherAvis();
-                    ?>
-                    <?php
-             $nbclientsn=0;
-             
-             foreach ($listeavis as $row)
-                 {
-                     $nbclientsn++;
-                    
-                 }
-         ?>
-
-         </br>
-         <label style="color: black" for="id_avis"><h7 style="color:#00CED1"><?php echo $nbclientsn;?></h7> visiteurs ont noté notre site</label>
-            </div>
-          </div>
-        </div>
-          <h3><i class="fa fa-angle-right"></i> moyenne d'age des clients</h3>
-          <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-             <?php
-                $listeavis=$avis1C-> afficherAvis();
-                    ?>
-                    <?php
-             $nbclients=0;
-             $moyenneAge=0;
-             foreach ($listeavis as $row)
-                 {
-                     $nbclients++;
-                    
-                     $moyenneAge+=$row["age"];
-                 }
-         ?>
-
-         </br>
-         <label style="color: black" for="id_avis">moyenne d'age des clients qui on voter:<h7 style="color:#00CED1"><?php echo $moyenneAge/$nbclients;?></h7> ans </label>
-            </div>
-          </div>
-        </div>
-        
-         <?php
-                $listeavis2=$avis1C-> afficherAvis5();
-                    ?>
-                    <?php
-             $nbclients5=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients5++;
-                    
-                 }
-                 $pourcentage5=($nbclients5/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis4();
-                    ?>
-                    <?php
-             $nbclients4=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients4++;
-                    
-                 }
-                 $pourcentage4=($nbclients4/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis3();
-                    ?>
-                    <?php
-             $nbclients3=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients3++;
-                    
-                 }
-                 $pourcentage3=($nbclients3/$nbclients)*100;
-         ?>
-
-         <?php
-                $listeavis2=$avis1C-> afficherAvis2();
-                    ?>
-                    <?php
-             $nbclients2=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients2++;
-                    
-                 }
-                 $pourcentage2=($nbclients2/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis1();
-                    ?>
-                    <?php
-             $nbclients1=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients1++;
-                    
-                 }
-                 $pourcentage1=($nbclients1/$nbclients)*100;
-         ?>
-
-
-        <div class="border-head">
-              <h3><i class="fa fa-angle-right"></i> statistique note</h3>
-            </div>
-            <div class="custom-bar-chart">
-              <ul class="y-axis">
-                <li><span>100%</span></li>
-                <li><span>80%</span></li>
-                <li><span>60%</span></li>
-                <li><span>40%</span></li>
-                <li><span>20%</span></li>
-                <li><span>0%</span></li>
-              </ul>
-              <div class="bar">
-                <div class="title">trés bien</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage5) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage5) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">bien</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage4) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage4) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">moyenne</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage3) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage3) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">movaise</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage2) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage2) ?>%</div>
-              </div>
-              <div class="bar">
-                <div class="title">trés movaise</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage1) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage1) ?>%</div>
-              </div>
-            </div>
-          </div>
-              
           <!-- col-lg-12-->
         </div>
        

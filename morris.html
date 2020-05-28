@@ -1,5 +1,5 @@
-
-
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>services des avis </title>
+  <title>Dashio - Bootstrap Admin Template</title>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -17,8 +17,7 @@
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="lib/bootstrap-daterangepicker/daterangepicker.css" />
+  <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -42,7 +41,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>SAMAANI école</b></a>
+      <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -297,17 +296,15 @@
             </ul>
           </li>
           <li class="sub-menu">
-            <a class="active" href="javascript:;">
+            <a href="javascript:;">
               <i class="fa fa-tasks"></i>
-              <span>avis et réclamation</span>
+              <span>Forms</span>
               </a>
             <ul class="sub">
-              <li ><a href="gestion_des_reclamation.php">gestion des réclamation</a></li>
-              <li><a href="trierreclamation.php">tri des réclamations</a></li>
-              <li class="active"><a href="gestion_des_avis.php">gestion des avis</a></li>
-              <li><a href="trieravis.php">tri des avis</a></li>
+              <li><a href="form_component.html">Form Components</a></li>
+              <li><a href="advanced_form_components.html">Advanced Components</a></li>
+              <li><a href="form_validation.html">Form Validation</a></li>
               <li><a href="contactform.html">Contact Form</a></li>
-              
             </ul>
           </li>
           <li class="sub-menu">
@@ -329,12 +326,12 @@
               </a>
           </li>
           <li class="sub-menu">
-            <a href="javascript:;">
+            <a class="active" href="javascript:;">
               <i class=" fa fa-bar-chart-o"></i>
               <span>Charts</span>
               </a>
             <ul class="sub">
-              <li><a href="morris.html">Morris</a></li>
+              <li class="active"><a href="morris.html">Morris</a></li>
               <li><a href="chartjs.html">Chartjs</a></li>
               <li><a href="flot_chart.html">Flot Charts</a></li>
               <li><a href="xchart.html">xChart</a></li>
@@ -366,235 +363,57 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-      <section class="wrapper" >
-        <h3><i class="fa fa-angle-right"></i> affichage des avis</h3>
-        <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-              
-                <?PHP
-                include "../core/avisC.php";
-                $avis1C=new avisC();
-                $listeavis=$avis1C-> afficherAvis();
-
-                 //var_dump($listereclamation->fetchAll()); 
-                 ?>
-                
-                
-                 <table border="1" >
-                  <tr>
-                 <td>Nom et prenom</td>
-                 <td>id</td>
-                 <td>age</td> 
-                 <td>note</td>
-                  
-                 
-                  </tr>
-
-                     <?PHP
-                     //echo "imchi";
-
-                     foreach($listeavis as $row){
-                      ?>
-                         <tr>
-                        <td><?PHP echo $row['nom_et_prenom_avis']; ?></td>
-                        <td><?PHP echo $row['id_avis']; ?></td>
-                        <td><?PHP echo $row['age']; ?></td>
-                        <td><?PHP echo $row['note']; ?></td>
-                        
-                        
-                          </tr>
-                         <?PHP
-                                }
-                              ?>
-                              </table>
-                              <br>
-                              <br>
-                                    <form class="form-inline" method="POST" action="trieravis.php" >
-                      <fieldset >
-                                <div class="form-group">
-                        <label style="color: black" for="id">trier les avis par note:</label>
-                  <input type="submit" name="trier" value="trier" class="btn btn-info"  >
-                </div>
-                 </fieldset>
-                    </form>
-                     </form>
-                      <form class="form-inline" method="POST" action="rechercheravis.php" >
-                      <fieldset >
-
-                      <div class="form-group">
-                  <label style="color: black" for="id">Saisir l'id de l'avis à rechercher:</label><br>
-                  <input class="form-control" type="text" name="id_r2" id="id_r2" placeholder="id:reclamation a rechercher">
-                  <input type="submit" name="rechercher" value="rechercher" class="btn btn-info">
-                </div>
-                      </fieldset>
-                    </form>
-
-
-                    <form class="form-inline" method="POST" action="supprimeavis.php" >
-                      <fieldset >
-
-                      <div class="form-group">
-                  <label style="color: black" for="id_avis">Saisir l'id de l'avis à supprimer:</label><br>
-                  <input class="form-control" type="text" name="id_avis" id="id_avis" placeholder="id:avis a supprimer">
-                  <input type="submit" name="supprimer" value="supprimer" class="btn btn-info">
-                </div>
-                      </fieldset>
-                    </form>
-            </div>
-          </div>
-          <h3><i class="fa fa-angle-right"></i> nombre totale des avis</h3>
+      <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Morris Charts</h3>
+        <!-- page start-->
+        <div id="morris">
           <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-             <?php
-                $listeavis=$avis1C-> afficherAvis();
-                    ?>
-                    <?php
-             $nbclientsn=0;
-             
-             foreach ($listeavis as $row)
-                 {
-                     $nbclientsn++;
-                    
-                 }
-         ?>
-
-         </br>
-         <label style="color: black" for="id_avis"><h7 style="color:#00CED1"><?php echo $nbclientsn;?></h7> visiteurs ont noté notre site</label>
+            <div class="col-lg-6">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Chart Example 1</h4>
+                <div class="panel-body">
+                  <div id="hero-graph" class="graph"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
+                <div class="panel-body">
+                  <div id="hero-bar" class="graph"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-          <h3><i class="fa fa-angle-right"></i> moyenne d'age des clients</h3>
           <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-             <?php
-                $listeavis=$avis1C-> afficherAvis();
-                    ?>
-                    <?php
-             $nbclients=0;
-             $moyenneAge=0;
-             foreach ($listeavis as $row)
-                 {
-                     $nbclients++;
-                    
-                     $moyenneAge+=$row["age"];
-                 }
-         ?>
-
-         </br>
-         <label style="color: black" for="id_avis">moyenne d'age des clients qui on voter:<h7 style="color:#00CED1"><?php echo $moyenneAge/$nbclients;?></h7> ans </label>
+            <div class="col-lg-6">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Chart Example 3</h4>
+                <div class="panel-body">
+                  <div id="hero-area" class="graph"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> Chart Example 4</h4>
+                <div class="panel-body">
+                  <div id="hero-donut" class="graph"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
-         <?php
-                $listeavis2=$avis1C-> afficherAvis5();
-                    ?>
-                    <?php
-             $nbclients5=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients5++;
-                    
-                 }
-                 $pourcentage5=($nbclients5/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis4();
-                    ?>
-                    <?php
-             $nbclients4=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients4++;
-                    
-                 }
-                 $pourcentage4=($nbclients4/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis3();
-                    ?>
-                    <?php
-             $nbclients3=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients3++;
-                    
-                 }
-                 $pourcentage3=($nbclients3/$nbclients)*100;
-         ?>
-
-         <?php
-                $listeavis2=$avis1C-> afficherAvis2();
-                    ?>
-                    <?php
-             $nbclients2=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients2++;
-                    
-                 }
-                 $pourcentage2=($nbclients2/$nbclients)*100;
-         ?>
-         <?php
-                $listeavis2=$avis1C-> afficherAvis1();
-                    ?>
-                    <?php
-             $nbclients1=0;
-             foreach ($listeavis2 as $row)
-                 {
-                     $nbclients1++;
-                    
-                 }
-                 $pourcentage1=($nbclients1/$nbclients)*100;
-         ?>
-
-
-        <div class="border-head">
-              <h3><i class="fa fa-angle-right"></i> statistique note</h3>
-            </div>
-            <div class="custom-bar-chart">
-              <ul class="y-axis">
-                <li><span>100%</span></li>
-                <li><span>80%</span></li>
-                <li><span>60%</span></li>
-                <li><span>40%</span></li>
-                <li><span>20%</span></li>
-                <li><span>0%</span></li>
-              </ul>
-              <div class="bar">
-                <div class="title">trés bien</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage5) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage5) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">bien</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage4) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage4) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">moyenne</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage3) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage3) ?>%</div>
-              </div>
-              <div class="bar ">
-                <div class="title">movaise</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage2) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage2) ?>%</div>
-              </div>
-              <div class="bar">
-                <div class="title">trés movaise</div>
-                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage1) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage1) ?>%</div>
-              </div>
-            </div>
-          </div>
-              
-          <!-- col-lg-12-->
-        </div>
-       
+        <!-- page end-->
+      </section>
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
     <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong>Samaani école</strong>. All Rights Reserved
+          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
         </p>
         <div class="credits">
           <!--
@@ -603,9 +422,9 @@
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-          Created with M.GURUS template by <a href="https://templatemag.com/">TemplateMag</a>
+          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
         </div>
-        <a href="form_component.html#" class="go-top">
+        <a href="morris.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
@@ -618,21 +437,13 @@
   <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
   <script src="lib/jquery.scrollTo.min.js"></script>
   <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="lib/raphael/raphael.min.js"></script>
+  <script src="lib/morris/morris.min.js"></script>
   <!--common script for all pages-->
   <script src="lib/common-scripts.js"></script>
   <!--script for this page-->
-  <script src="lib/jquery-ui-1.9.2.custom.min.js"></script>
-  <!--custom switch-->
-  <script src="lib/bootstrap-switch.js"></script>
-  <!--custom tagsinput-->
-  <script src="lib/jquery.tagsinput.js"></script>
-  <!--custom checkbox & radio-->
-  <script type="text/javascript" src="lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="lib/bootstrap-daterangepicker/date.js"></script>
-  <script type="text/javascript" src="lib/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <script type="text/javascript" src="lib/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-  <script src="lib/form-component.js"></script>
+  <script src="lib/morris-conf.js"></script>
 
 </body>
 
-
+</html>
