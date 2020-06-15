@@ -1,8 +1,11 @@
 <?php
 session_start();
-include "core/produitc.php";
-$cat =new produitc();
-    $list=$cat->recupcat((int)$_GET['id']);
+include "core/promotionc.php";
+//include "core/produitc.php";
+$cat =new promotionc();
+//$cate =new produitc();
+
+   // $list=$cat->categoriePrint();
 //var_dump($list);
 ?>
 <!DOCTYPE html>
@@ -14,7 +17,7 @@ $cat =new produitc();
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>SAMA3NI ECOLE - Bootstrap Admin Template</title>
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
@@ -27,7 +30,7 @@ $cat =new produitc();
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
-
+<script type="text/javascript" src="verif.js"></script>
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -47,7 +50,7 @@ $cat =new produitc();
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
+      <a href="index.html" class="logo"><b>SAMA3NI<span>ecole</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -250,7 +253,7 @@ $cat =new produitc();
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered"><a href="profile.html"><img src="ybo.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Ahlem Elayeb </h5>
+          <h5 class="centered"> ahlem elayeb</h5>
           <li class="mt">
             <a href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -260,12 +263,12 @@ $cat =new produitc();
           <li class="sub-menu">
             <a class="active" href="javascript:;">
               <i class="fa fa-desktop"></i>
-              <span>Gestion  des produits </span>
+              <span> Gestion des promotions </span>
               </a>
             <ul class="sub">
               
-              <li class="active"><a href="buttons.php">ajouter produit </a></li>
-              <li class="active"><a href="ajcategorie.php">ajouter promotion</a></li>
+              <li class="active"><a href="ajout.php">ajouter promo</a></li>
+              
             </ul>
           </li>
           <li class="sub-menu">
@@ -372,41 +375,60 @@ $cat =new produitc();
         <div class="row mt">
           <div class="col-lg-6 col-md-6 col-sm-12">
            
-            <h3>Modifier  un produit</h3>
-<form method="POST" name="Modifier" action="modifiercat.php?id=<?php echo $list['id']; ?>"  enctype="multipart/form-data">
+            <h3>Ajouter une promotion </h3>
+<form method="POST" name="platform" action="ajout2.php"  enctype="multipart/form-data">
 <div>
-    <label class="control-label">nom</label>
+    <label class="control-label">id du promotion</label>
     <div class="controls">
-    <input class="controle" type="text" name="nom" value="<?php echo $list['nom']; ?>" required pattern="[a-zA-Z-\.]{3,12}" placeholder="saisir le nom du produit">
+    <input class="controle" type="number" name="id"  placeholder="saisir l id">
     </div>
     <p>
 </div>
 <div>
-    <label class="control-label">id</label>
+    <label class="control-label">idp</label>
     <div class="controls">
-    <input class="controle" type="text" name="id" value="<?php echo $list['id']; ?>"  placeholder="saisir l id du produit">
+    <input name="idp" type="number" required pattern="[0-9]" x-moz-errormessage="Le idp doix etre des chiffres" placeholder="idp">
     </div>
     <p>
 </div>
-
 <div>
-    <label class="control-label">prix</label>
+    <label class="control-label">pourcentage</label>
     <div class="controls">
-    <textarea rows="4" cols="50" name="prix" value="<?php echo $list['prix']; ?>" placeholder="prix" required pattern="[A-Za-z].{4,}"></textarea>
+    <input name="pourcentage" type="number" required>
     </div>
+    <p>
+</div>
+<div>
+    <label class="control-label">newprice</label>
+    <div class="controls">
+          <input name="newprice" type="number" required>
 
+    </div>
+    <p>
+</div>
     <div>
-    <label class="control-label">idm</label>
-    <div class="controls">
-    <textarea rows="4" cols="50" name="idm" value="<?php echo $list['id_m']; ?>" placeholder="idm" required pattern="[A-Za-z].{4,}"></textarea>
+        <SELECT name="promotion" size="1">
+            <?php  
+$list=$cat->afficher();
+            foreach($list as $cat){ ?>
+            <OPTION><?php echo $cat['id']; ?></OPTION>
+            <?php  } ?>
+        </SELECT>
+
     </div>
+
+<div>
+   
     <p>
 </div>
+<div>
 
-<br/>
+    
+    <p>
+</div>
+<input type="submit" name="ajouter" value="Ajouter" class="btn btn-primary">
+ <input type="reset" value="Reset" style="background-clor:#0c2646;border-color:#0c2646; color:white;">
 
-<input type="submit" name="modifier" value="Modifier" class="btn btn-primary">
- <input type="reset" value="Reset" style="background-color:#0c2646;border-color:#0c2646; color:white;">
     </form>
           </div>
           <!-- /col-lg-6 -->
@@ -429,10 +451,22 @@ $cat =new produitc();
   <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
   <!--common script for all pages-->
   <script src="lib/common-scripts.js"></script>
-  <?php
+
+  </form>
+                    <form class="form-inline" method="POST" action="pdf5.php" >
+                      <fieldset >
+
+                      <div class="form-group">
+                        
+                        <label style="color: black" for="id">télécharger les promotions.pdf:</label>
+                  <input type="submit" name="télécharger" value="télécharger en pdf">
+                </div>
+                      </fieldset>
+                    </form>
+<?php
 if(isset($_SESSION["message"])){
-  echo $_SESSION["message"];
-  unset($_SESSION["message"]);
+	echo $_SESSION["message"];
+	unset($_SESSION["message"]);
 }
 
 

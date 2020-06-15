@@ -1,14 +1,74 @@
-<?php
-session_start();
-include "core/produitc.php";
-$cat =new produitc();
-    $list=$cat->recupcat((int)$_GET['id']);
-//var_dump($list);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
+
+        <style>
+            #tt{
+                background-color:indianred;
+                color:white;
+            }
+        .product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 0px;border:0px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
+        .product-grid .product-image{position:relative;transition:all .3s ease 0s}
+        .product-grid .product-image a{display:block}
+        .product-grid .product-image img{width:100%;height:auto}
+
+        .product-grid .social{width:150px;padding:0;margin:0;list-style:none;opacity:0;transform:translateY(-50%) translateX(-50%);position:absolute;top:60%;left:50%;z-index:1;transition:all .3s ease 0s}
+        .product-grid:hover .social{opacity:1;top:50%}
+        .product-grid .social li{display:inline-block}
+        .product-grid .social li a{color:#fff;background-color:#333;font-size:16px;line-height:40px;text-align:center;height:40px;width:40px;margin:0 2px;display:block;position:relative;transition:all .3s ease-in-out}
+        .product-grid .social li a:after,.product-grid .social li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;letter-spacing:1px;line-height:20px;padding:1px 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
+        .product-grid .social li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
+        .product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
+        .product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#ef5777;font-size:12px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
+        .product-grid .product-discount-label{background-color:#333;left:auto;right:0}
+
+        .product-grid .product-content{background-color:#fff;text-align:center;padding:12px 0;margin:0 auto;position:absolute;left:0;right:0;bottom:-27px;z-index:1;transition:all .3s}
+        .product-grid:hover .product-content{bottom:0}
+        .product-grid .price{color:#333;font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.6px;margin-bottom:8px;text-align:center;transition:all .3s}
+        .product-grid .price span{color:#999;font-size:13px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
+        .product-grid .add-to-cart{color:#000;font-size:13px;font-weight:600}
+        @media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
+
+            #bri{
+                font-weight: bold;
+
+            }
+            .oo{
+                width: 20px;
+                border-radius: 50%;
+                display: block;
+                height: 20px;
+            }
+            #x{
+
+                font-size:100px;
+
+            }
+            #y{
+
+                font-size:50px;
+
+            }
+
+            #uu{
+                padding: 0px;
+            }
+            font-weight: bold;
+            font-family: 'Titillium Web', sans-serif;
+        }
+        #alls{
+            text-align: right;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+
+
+
+
+    </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -249,8 +309,8 @@ $cat =new produitc();
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="ybo.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Ahlem Elayeb </h5>
+          <p class="centered"><a href="profile.html"></a></p>
+          <h5 class="centered"> Iheb Mbarki </h5>
           <li class="mt">
             <a href="index.html">
               <i class="fa fa-dashboard"></i>
@@ -260,12 +320,12 @@ $cat =new produitc();
           <li class="sub-menu">
             <a class="active" href="javascript:;">
               <i class="fa fa-desktop"></i>
-              <span>Gestion  des produits </span>
+              <span> Gestion des events </span>
               </a>
             <ul class="sub">
               
-              <li class="active"><a href="buttons.php">ajouter produit </a></li>
-              <li class="active"><a href="ajcategorie.php">ajouter promotion</a></li>
+            
+
             </ul>
           </li>
           <li class="sub-menu">
@@ -371,44 +431,59 @@ $cat =new produitc();
       <section class="wrapper">
         <div class="row mt">
           <div class="col-lg-6 col-md-6 col-sm-12">
+
+              <?php
+              include "core/eventC.php";
+              $categor =new eventc();
+              $list=$categor->afficher();
+//var_dump($list);
+?>
+              <center><h1 id="bri"><strong>List des events</strong></h1></center>
+
+              <br id="y"/>
+
+
+              <br id="x"/>
+              <div class="container">
+                  <div class="row">
+
+<table border="3" class="table">
+    <thead>
+    <th  id="tt"><strong>nom</strong></th>
+    <th id="tt"><strong>theme</strong></th>
+    <th id="tt"><strong>id</strong></th>
+  
+    <th id="tt"><strong>Suppression</strong></th>
+    <th id="tt"><strong>Modification</strong></th>
+
+    </thead>
+    <tbody>
+    <?php
+    if(!empty($list)){
+    foreach($list as $p){
+    ?>
+        <tr scope="row">
+            <td><?php echo $p['nom']; ?></td>
+            <td><?php echo $p['theme']; ?></td>
+            <td><?php echo $p['id']; ?></td>
+            
            
-            <h3>Modifier  un produit</h3>
-<form method="POST" name="Modifier" action="modifiercat.php?id=<?php echo $list['id']; ?>"  enctype="multipart/form-data">
-<div>
-    <label class="control-label">nom</label>
-    <div class="controls">
-    <input class="controle" type="text" name="nom" value="<?php echo $list['nom']; ?>" required pattern="[a-zA-Z-\.]{3,12}" placeholder="saisir le nom du produit">
-    </div>
-    <p>
-</div>
-<div>
-    <label class="control-label">id</label>
-    <div class="controls">
-    <input class="controle" type="text" name="id" value="<?php echo $list['id']; ?>"  placeholder="saisir l id du produit">
-    </div>
-    <p>
-</div>
 
-<div>
-    <label class="control-label">prix</label>
-    <div class="controls">
-    <textarea rows="4" cols="50" name="prix" value="<?php echo $list['prix']; ?>" placeholder="prix" required pattern="[A-Za-z].{4,}"></textarea>
-    </div>
+        </tr>
+    <?php } }?>
+    </tbody>
+</table>
 
-    <div>
-    <label class="control-label">idm</label>
-    <div class="controls">
-    <textarea rows="4" cols="50" name="idm" value="<?php echo $list['id_m']; ?>" placeholder="idm" required pattern="[A-Za-z].{4,}"></textarea>
-    </div>
-    <p>
-</div>
 
-<br/>
+                  </div>
 
-<input type="submit" name="modifier" value="Modifier" class="btn btn-primary">
- <input type="reset" value="Reset" style="background-color:#0c2646;border-color:#0c2646; color:white;">
-    </form>
-          </div>
+                  <?php if(!empty($list)){ ?>
+                      <a href="triercat.php?Name=<?php echo $p["id"]; ?>">
+                          <input class="btn btn-success" type="button" value="Trier">
+                      </a>
+                  <?php } ?>
+
+                  </div>
           <!-- /col-lg-6 -->
         </div>
         <!--/ row -->
@@ -429,14 +504,6 @@ $cat =new produitc();
   <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
   <!--common script for all pages-->
   <script src="lib/common-scripts.js"></script>
-  <?php
-if(isset($_SESSION["message"])){
-  echo $_SESSION["message"];
-  unset($_SESSION["message"]);
-}
-
-
-?>
 </body>
 
 </html>

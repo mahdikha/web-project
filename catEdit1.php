@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "core/produitc.php";
-$cat =new produitc();
+include "core/promotionc.php";
+$cat =new promotionc();
     $list=$cat->recupcat((int)$_GET['id']);
 //var_dump($list);
 ?>
@@ -372,33 +372,33 @@ $cat =new produitc();
         <div class="row mt">
           <div class="col-lg-6 col-md-6 col-sm-12">
            
-            <h3>Modifier  un produit</h3>
-<form method="POST" name="Modifier" action="modifiercat.php?id=<?php echo $list['id']; ?>"  enctype="multipart/form-data">
-<div>
-    <label class="control-label">nom</label>
-    <div class="controls">
-    <input class="controle" type="text" name="nom" value="<?php echo $list['nom']; ?>" required pattern="[a-zA-Z-\.]{3,12}" placeholder="saisir le nom du produit">
-    </div>
-    <p>
-</div>
+            <h3>Modifier  une promo</h3>
+<form method="POST" name="Modifier" action="modifiercat1.php?id=<?php echo $list['id']; ?>"  enctype="multipart/form-data">
 <div>
     <label class="control-label">id</label>
     <div class="controls">
-    <input class="controle" type="text" name="id" value="<?php echo $list['id']; ?>"  placeholder="saisir l id du produit">
+    <input class="controle" type="number" name="id" value="<?php echo $list['id']; ?>"  placeholder="saisir le id du promo">
+    </div>
+    <p>
+</div>
+<div>
+    <label class="control-label">idp</label>
+    <div class="controls">
+    <input class="controle" type="text" name="idp" value="<?php echo $list['idp']; ?>"  placeholder="saisir l idp du produit">
     </div>
     <p>
 </div>
 
 <div>
-    <label class="control-label">prix</label>
+    <label class="control-label">pourcentage</label>
     <div class="controls">
-    <textarea rows="4" cols="50" name="prix" value="<?php echo $list['prix']; ?>" placeholder="prix" required pattern="[A-Za-z].{4,}"></textarea>
+    <textarea rows="4" cols="50" name="pourcentage" value="<?php echo $list['pourcentage']; ?>" placeholder="pourcentage" required pattern="[A-Za-z].{4,}"></textarea>
     </div>
 
     <div>
-    <label class="control-label">idm</label>
+    <label class="control-label">newprice</label>
     <div class="controls">
-    <textarea rows="4" cols="50" name="idm" value="<?php echo $list['id_m']; ?>" placeholder="idm" required pattern="[A-Za-z].{4,}"></textarea>
+    <textarea rows="4" cols="50" name="newprice" value="<?php echo $list['newprice']; ?>" placeholder="newprice" required pattern="[A-Za-z].{4,}"></textarea>
     </div>
     <p>
 </div>

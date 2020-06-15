@@ -89,7 +89,7 @@
   <link href="css/style-responsive.css" rel="stylesheet">
 
   <!-- =======================================================
-    Template Name: Dashio
+    Template Name: SAMA3NI ECOLE
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
     Author: TemplateMag.com
     License: https://templatemag.com/license/
@@ -107,7 +107,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>DASH<span>IO</span></b></a>
+      <a href="index.html" class="logo"><b>SAMA3NI<span>ecole</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -480,11 +480,106 @@
 
                   </div>
 
+
+
+
+
+
+                   <h3><i class="fa fa-angle-right"></i> nombre totale des produits</h3>
+          <div class="row mt">
+          <div class="col-lg-12">
+            <div class="form-panel">
+             <?php
+
+             //include "core/produitc.php";
+              //$categor =new produitc();
+              $list=$categor->afficher();
+                //$listereclamation=$produitc-> afficher();
+                    ?>
+                    <?php
+             $nbrec=0;
+             foreach ($list as $row)
+                 {
+                     $nbrec++;
+                 }
+         ?>
+
+         
+         <label style="color: black" >vous avez <h7 style="color:#00CED1"><?php echo $nbrec;?></h7> produits non traiter </label>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+ <?php
+  $list=$categor->afficher();
+
+               
+                    ?>
+                    <?php
+             $nbclients5=0;
+             foreach ($list as $row)
+                 {
+                     $nbclients5++;
+                    
+                 }
+                 $pourcentage5=($nbclients5/30)*100;
+         ?>
+        
+
+        <div class="border-head">
+              <h3><i class="fa fa-angle-right"></i> statistique prix</h3>
+            </div>
+            <div class="custom-bar-chart">
+              <ul class="y-axis">
+                <li><span>100%</span></li>
+                <li><span>80%</span></li>
+                <li><span>60%</span></li>
+                <li><span>40%</span></li>
+                <li><span>20%</span></li>
+                <li><span>0%</span></li>
+              </ul>
+              <div class="bar">
+                <div class="title">medium</div>
+                <div class="value tooltips" data-original-title="<?php echo intval($pourcentage5) ?>%" data-toggle="tooltip" data-placement="top"><?php echo intval($pourcentage5) ?>%</div>
+              </div>
+              
+            </div>
+          </div>
+              
+          <!-- col-lg-12-->
+        </div>
+
+
+
+<br>
+                              <br>
+                                      <form class="form-inline" method="POST" action="mail.php" >
+                      <fieldset >
+                                <div class="form-group">
+                        <label style="color: black" for="id">envoyer un mail de confirmation:</label>
+                        <input class="form-control" type="mail" name="mail_to" id="mail_to" placeholder="mail du client" >
+                  <input type="submit" name="envoyer" value="envoyer" class="btn btn-info"  >
+                </div>
+                 </fieldset>
+                    </form>
+
+
+
+
+
+
                   <?php if(!empty($list)){ ?>
                       <a href="triercat.php?Name=<?php echo $p["prix"]; ?>">
                           <input class="btn btn-success" type="button" value="Trier">
                       </a>
                   <?php } ?>
+
+
+                  <a href="metier4.html"> CHERCHER</a>
 
                   </div>
           <!-- /col-lg-6 -->

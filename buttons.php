@@ -404,9 +404,11 @@ $cat =new produitc();
     <p>
 </div>
     <div>
-        <SELECT name="categorie" size="1">
-            <?php  foreach($list as $p){ ?>
-            <OPTION><?php echo $p['catid']; ?></OPTION>
+        <SELECT name="produit" size="1">
+            <?php  
+$list=$cat->afficher();
+            foreach($list as $cat){ ?>
+            <OPTION><?php echo $cat['id']; ?></OPTION>
             <?php  } ?>
         </SELECT>
 
